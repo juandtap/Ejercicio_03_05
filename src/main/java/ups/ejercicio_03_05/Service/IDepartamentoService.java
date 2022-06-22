@@ -15,7 +15,7 @@ public interface IDepartamentoService {
     public Departamento crearDepartamento(Departamento departamento);
     public List<Departamento> listarDepartamentos();
     public Departamento getDepartamentoByCode(int codigo);
-    public void actualizarDepartamenti(int codigo, Departamento departamento);
+    public void actualizarDepartamento(int codigo, Departamento departamento);
     public Departamento eliminarDepartamento(int codigo);
-    public int getPositionDepartaento(Departamento departamento);
+    public int getPositionDepartamento(Departamento departamento);
 }

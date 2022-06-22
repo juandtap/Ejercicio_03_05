@@ -39,7 +39,7 @@ public class DepartamentoController {
     }
     
     public void actualizarDepartamento(int codigo, Departamento departamentoNew){
-        departamentoService.actualizarDepartamenti(codigo, departamentoNew);
+        departamentoService.actualizarDepartamento(codigo, departamentoNew);
     }
     
     
