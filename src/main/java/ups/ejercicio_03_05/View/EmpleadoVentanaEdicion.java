@@ -308,6 +308,7 @@ public class EmpleadoVentanaEdicion extends javax.swing.JInternalFrame {
         jTextFieldDireccion.setText(this.empleado.getDireccion());
         jTextFieldCargo.setText(this.empleado.getCargo());
         jTextFieldSalario.setText(String.valueOf(this.empleado.getSalario()));
+        jComboBoxNacionalidad.setSelectedItem(this.empleado.getNacionalidad());
         jComboBoxAnioNac.setSelectedItem(String.valueOf(this.empleado.getFechaNacimiento().getYear()));
         jComboBoxMesNac.setSelectedIndex(this.empleado.getFechaNacimiento().getMonthValue() -1);
         jComboBoxDiaNac.setSelectedIndex(this.empleado.getFechaNacimiento().getDayOfMonth() -1);
