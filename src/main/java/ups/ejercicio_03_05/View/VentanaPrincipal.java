@@ -32,10 +32,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuEmpresa = new javax.swing.JMenu();
-        jMenuItemAdd = new javax.swing.JMenuItem();
-        jMenuItemEdit = new javax.swing.JMenuItem();
+        jMenuItemEmpresa = new javax.swing.JMenuItem();
         jMenuDepartamento = new javax.swing.JMenu();
+        jMenuItemDep = new javax.swing.JMenuItem();
         jMenuEmpleado = new javax.swing.JMenu();
+        jMenuItemEmpleado = new javax.swing.JMenuItem();
         jMenuExit = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,18 +57,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuEmpresa.setText("Empresa");
 
-        jMenuItemAdd.setText("Agregar/Ver");
-        jMenuEmpresa.add(jMenuItemAdd);
-
-        jMenuItemEdit.setText("Editar");
-        jMenuEmpresa.add(jMenuItemEdit);
+        jMenuItemEmpresa.setText("Agregar/Editar");
+        jMenuEmpresa.add(jMenuItemEmpresa);
 
         jMenuBar1.add(jMenuEmpresa);
 
         jMenuDepartamento.setText("Departamento");
+
+        jMenuItemDep.setText("Agregar/Editar");
+        jMenuDepartamento.add(jMenuItemDep);
+
         jMenuBar1.add(jMenuDepartamento);
 
         jMenuEmpleado.setText("Empleado");
+
+        jMenuItemEmpleado.setText("Agregar/Editar");
+        jMenuEmpleado.add(jMenuItemEmpleado);
+
         jMenuBar1.add(jMenuEmpleado);
 
         jMenuExit.setText("Salir");
@@ -121,7 +127,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuEmpleado;
     private javax.swing.JMenu jMenuEmpresa;
     private javax.swing.JMenu jMenuExit;
-    private javax.swing.JMenuItem jMenuItemAdd;
-    private javax.swing.JMenuItem jMenuItemEdit;
+    private javax.swing.JMenuItem jMenuItemDep;
+    private javax.swing.JMenuItem jMenuItemEmpleado;
+    private javax.swing.JMenuItem jMenuItemEmpresa;
     // End of variables declaration//GEN-END:variables
 }
