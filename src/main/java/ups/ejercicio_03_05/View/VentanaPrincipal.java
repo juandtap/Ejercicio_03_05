@@ -83,6 +83,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuEmpleado.setText("Empleado");
 
         jMenuItemEmpleado.setText("Agregar/Editar");
+        jMenuItemEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEmpleadoActionPerformed(evt);
+            }
+        });
         jMenuEmpleado.add(jMenuItemEmpleado);
 
         jMenuBar1.add(jMenuEmpleado);
@@ -141,6 +146,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        departamentoVentana.setResizable(true);
        departamentoVentana.setVisible(true);
     }//GEN-LAST:event_jMenuItemDepActionPerformed
+
+    private void jMenuItemEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEmpleadoActionPerformed
+        var empleadoVentana = new EmpleadoVentana(this.jDesktopPane1);
+        this.jDesktopPane1.add(empleadoVentana);
+        empleadoVentana.setIconifiable(true);
+        empleadoVentana.setClosable(true);
+        empleadoVentana.setResizable(true);
+        empleadoVentana.setVisible(true);
+    }//GEN-LAST:event_jMenuItemEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments

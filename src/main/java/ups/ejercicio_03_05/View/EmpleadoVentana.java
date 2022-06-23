@@ -5,6 +5,8 @@
 package ups.ejercicio_03_05.View;
 
 import java.time.LocalDate;
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import ups.ejercicio_03_05.Controller.EmpleadoController;
@@ -14,15 +16,18 @@ import ups.ejercicio_03_05.Model.Departamento;
  *
  * @author Diego
  */
-public class EmpleadoVentana extends javax.swing.JFrame {
+public class EmpleadoVentana extends javax.swing.JInternalFrame {
 
     
     private final EmpleadoController empleadoController;
     private TableModel modeloTablaEmpleados;
+    private JDesktopPane jDesktopPane;
     
-    public EmpleadoVentana() {
+    public EmpleadoVentana(JDesktopPane jDesktopPane) {
         initComponents();
         this.empleadoController = new EmpleadoController();
+        this.jDesktopPane = jDesktopPane;
+        this.jButtonEdicion.setEnabled(false);
     }
 
     /**
@@ -63,7 +68,7 @@ public class EmpleadoVentana extends javax.swing.JFrame {
         jTableEmpleados = new javax.swing.JTable();
         jButtonEdicion = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Empleados");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "EMPLEADOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.Color.black)); // NOI18N
@@ -306,6 +311,7 @@ public class EmpleadoVentana extends javax.swing.JFrame {
         agregar();
         clearEmpleado();
         mostrarTablaEmpleados();
+         JOptionPane.showMessageDialog(this, "Empleado Agregado!");
     }//GEN-LAST:event_jButtonAgregarEmpleadoActionPerformed
 
     private void jButtonMostrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarEmpleadosActionPerformed
@@ -413,11 +419,22 @@ public class EmpleadoVentana extends javax.swing.JFrame {
         
         this.jTableEmpleados.setModel(modeloTablaEmpleados);
         
+         // habilita el boton de Edicion si hay elementos agregados, caso contrario lo deshabilita
+        if(!this.empleadoController.listarEmpleados().isEmpty()){
+            this.jButtonEdicion.setEnabled(true);
+        } else{
+            this.jButtonEdicion.setEnabled(false);
+        }
+        
     }
      
      private void editar(String cedula){
          EmpleadoVentanaEdicion empleadoVentanaEdicion = new EmpleadoVentanaEdicion(empleadoController.getEmpleadoByCedula(cedula));
-         empleadoVentanaEdicion.setLocationRelativeTo(this);
+         
+         this.jDesktopPane.add(empleadoVentanaEdicion);
+         empleadoVentanaEdicion.setIconifiable(true);
+         empleadoVentanaEdicion.setResizable(true);
+         empleadoVentanaEdicion.setClosable(true);
          empleadoVentanaEdicion.setVisible(true);
      }
      
@@ -426,7 +443,7 @@ public class EmpleadoVentana extends javax.swing.JFrame {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmpleadoVentana().setVisible(true);
+                
             }
         });
     }

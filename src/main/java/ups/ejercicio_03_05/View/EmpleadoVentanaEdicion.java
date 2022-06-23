@@ -5,6 +5,7 @@
 package ups.ejercicio_03_05.View;
 
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 import ups.ejercicio_03_05.Controller.EmpleadoController;
 import ups.ejercicio_03_05.Model.Departamento;
 import ups.ejercicio_03_05.Model.Empleado;
@@ -13,7 +14,7 @@ import ups.ejercicio_03_05.Model.Empleado;
  *
  * @author Diego
  */
-public class EmpleadoVentanaEdicion extends javax.swing.JFrame {
+public class EmpleadoVentanaEdicion extends javax.swing.JInternalFrame {
 
     private Empleado empleado;
     private final EmpleadoController empleadoController;
@@ -255,15 +256,31 @@ public class EmpleadoVentanaEdicion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-       actualizar();
-       System.out.println("empleado actualizado");
-       this.dispose();
+       
+       int opt = JOptionPane.showConfirmDialog(this, "Esta seguro de guardar los cambios?",
+                "Actualizar Empleado", JOptionPane.YES_NO_OPTION);
+        if (opt == 0) {
+            actualizar();
+            System.out.println("empleado actualizado");
+            JOptionPane.showMessageDialog(this, "Empleado Actualizado!");
+            this.dispose();
+        }
+       
+       
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-        empleadoController.eliminarEmpleado(this.empleado.getCedula());
-        System.out.println("empleado eliminado!");
-        this.dispose();
+        
+        int opt = JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar el elemento",
+                "Eliminar!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        
+        if (opt == 0) {
+            empleadoController.eliminarEmpleado(this.empleado.getCedula());
+            JOptionPane.showMessageDialog(this, "Empleado Eliminado!");
+            System.out.println("empleado eliminado!");
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jTextFieldSalarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSalarioKeyReleased
