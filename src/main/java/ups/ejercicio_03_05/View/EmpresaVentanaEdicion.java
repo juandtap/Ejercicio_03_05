@@ -5,6 +5,7 @@
 package ups.ejercicio_03_05.View;
 
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 import ups.ejercicio_03_05.Controller.EmpresaController;
 import ups.ejercicio_03_05.Model.Empresa;
 
@@ -12,11 +13,11 @@ import ups.ejercicio_03_05.Model.Empresa;
  *
  * @author Diego
  */
-public class EmpresaVentanaEdicion extends javax.swing.JFrame {
+public class EmpresaVentanaEdicion extends javax.swing.JInternalFrame {
 
     private Empresa empresa;
     final EmpresaController empresaController = new EmpresaController();
-    
+   
     public EmpresaVentanaEdicion(Empresa empresa) {
         initComponents();
         this.empresa = empresa;
@@ -210,14 +211,21 @@ public class EmpresaVentanaEdicion extends javax.swing.JFrame {
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         actualizar();
         System.out.println("Empresa actualizada");
+        JOptionPane.showMessageDialog(this, "Empresa Actualizada!");
         this.dispose();
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
 
-        empresaController.eliminarEmpresa(this.empresa.getCodigo());
-        System.out.println("empresa eliminada!");
-        this.dispose();
+        int opt = JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar el elemento", "Eliminar!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        
+        if (opt == 0) {
+            empresaController.eliminarEmpresa(this.empresa.getCodigo());
+            System.out.println("empresa eliminada!");
+            JOptionPane.showMessageDialog(this, "Empresa Eliminada!");
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     

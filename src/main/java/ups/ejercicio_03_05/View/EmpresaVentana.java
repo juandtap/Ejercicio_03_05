@@ -5,6 +5,8 @@
 package ups.ejercicio_03_05.View;
 
 import java.time.LocalDate;
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import ups.ejercicio_03_05.Controller.EmpresaController;
@@ -14,15 +16,20 @@ import ups.ejercicio_03_05.Model.Empresa;
  *
  * @author Diego
  */
-public class EmpresaVentana extends javax.swing.JFrame {
+public class EmpresaVentana extends javax.swing.JInternalFrame {
 
     
     final EmpresaController empresaController;
     private TableModel modeloTablaEmpresas;
+    public final JDesktopPane jDesktopPane;
     
-    public EmpresaVentana() {
+    
+    public EmpresaVentana(JDesktopPane jDesktopPane1) {
         initComponents();
         empresaController = new EmpresaController();
+        this.jDesktopPane = jDesktopPane1;
+        this.jButtonEditar.setEnabled(false);
+        
     }
 
     /**
@@ -59,7 +66,7 @@ public class EmpresaVentana extends javax.swing.JFrame {
         jTableEmpresas = new javax.swing.JTable();
         jButtonEditar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Empresa");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "EMPRESAS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.Color.black)); // NOI18N
@@ -256,6 +263,7 @@ public class EmpresaVentana extends javax.swing.JFrame {
         agregarEmpresa();
         clearDataEmpresa();
         mostrarTablaEmpresas();
+        JOptionPane.showMessageDialog(this, "Empresa Agregada!");
     }//GEN-LAST:event_jButtonAgregarEmpresaActionPerformed
 
     private void jButtonMostrarEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarEmpresasActionPerformed
@@ -320,20 +328,31 @@ public class EmpresaVentana extends javax.swing.JFrame {
         this.modeloTablaEmpresas = new DefaultTableModel(data,header);
         this.jTableEmpresas.setModel(modeloTablaEmpresas);
         
+        // habilita el boton de Edicion si hay elementos agregados, caso contrario lo deshabilita
+        if(!this.empresaController.listarEmpresas().isEmpty()){
+            this.jButtonEditar.setEnabled(true);
+        } else{
+            this.jButtonEditar.setEnabled(false);
+        }
     }
     
     
     private void editar(int posicion){
         EmpresaVentanaEdicion empresaVentanaEdicion = new EmpresaVentanaEdicion(this.empresaController.listarEmpresas().get(posicion));
-        empresaVentanaEdicion.setLocationRelativeTo(this);
+        
+        this.jDesktopPane.add(empresaVentanaEdicion);
+        empresaVentanaEdicion.setIconifiable(true);
+        empresaVentanaEdicion.setClosable(true);
+        empresaVentanaEdicion.setResizable(true);
         empresaVentanaEdicion.setVisible(true);
+         
     }
     
     public static void main(String args[]) {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmpresaVentana().setVisible(true);
+               
             }
         });
     }

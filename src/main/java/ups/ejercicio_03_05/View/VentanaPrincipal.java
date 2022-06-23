@@ -5,6 +5,7 @@
 package ups.ejercicio_03_05.View;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,16 +49,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 929, Short.MAX_VALUE)
+            .addGap(0, 1077, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 563, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
 
         jMenuEmpresa.setText("Empresa");
 
         jMenuItemEmpresa.setText("Agregar/Editar");
+        jMenuItemEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEmpresaActionPerformed(evt);
+            }
+        });
         jMenuEmpresa.add(jMenuItemEmpresa);
 
         jMenuBar1.add(jMenuEmpresa);
@@ -77,13 +83,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenuEmpleado);
 
         jMenuExit.setText("Salir");
-        jMenuExit.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jMenuExitMenuSelected(evt);
+        jMenuExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuExitMouseClicked(evt);
             }
         });
         jMenuBar1.add(jMenuExit);
@@ -98,21 +100,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuExitMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenuExitMenuSelected
-        this.dispose();
-    }//GEN-LAST:event_jMenuExitMenuSelected
+    private void jMenuItemEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEmpresaActionPerformed
+        var empresaVentana = new EmpresaVentana(this.jDesktopPane1);
+        this.jDesktopPane1.add(empresaVentana);
+        empresaVentana.setIconifiable(true);
+        empresaVentana.setClosable(true);
+        empresaVentana.setResizable(true);
+        empresaVentana.setVisible(true);
+    }//GEN-LAST:event_jMenuItemEmpresaActionPerformed
+
+    private void jMenuExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuExitMouseClicked
+        
+        
+        int opt = JOptionPane.showConfirmDialog(this, "SEGURO?", "SALIR DEL PROGRAMA",JOptionPane.YES_NO_OPTION );
+        if (opt == 0) {
+            System.exit(0);
+        }
+        
+        
+    }//GEN-LAST:event_jMenuExitMouseClicked
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
+         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VentanaPrincipal().setVisible(true);
@@ -121,7 +141,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    public javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuDepartamento;
     private javax.swing.JMenu jMenuEmpleado;
