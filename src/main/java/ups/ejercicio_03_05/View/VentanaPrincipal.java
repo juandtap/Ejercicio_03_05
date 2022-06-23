@@ -71,6 +71,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuDepartamento.setText("Departamento");
 
         jMenuItemDep.setText("Agregar/Editar");
+        jMenuItemDep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDepActionPerformed(evt);
+            }
+        });
         jMenuDepartamento.add(jMenuItemDep);
 
         jMenuBar1.add(jMenuDepartamento);
@@ -127,6 +132,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuExitMouseClicked
+
+    private void jMenuItemDepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDepActionPerformed
+       var departamentoVentana = new DepartamentoVentana(this.jDesktopPane1);
+       this.jDesktopPane1.add(departamentoVentana);
+       departamentoVentana.setIconifiable(true);
+       departamentoVentana.setClosable(true);
+       departamentoVentana.setResizable(true);
+       departamentoVentana.setVisible(true);
+    }//GEN-LAST:event_jMenuItemDepActionPerformed
 
     /**
      * @param args the command line arguments

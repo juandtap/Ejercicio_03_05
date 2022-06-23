@@ -4,6 +4,7 @@
  */
 package ups.ejercicio_03_05.View;
 
+import javax.swing.JOptionPane;
 import ups.ejercicio_03_05.Controller.DepartamentoController;
 import ups.ejercicio_03_05.Model.Departamento;
 import ups.ejercicio_03_05.Model.Empresa;
@@ -12,7 +13,7 @@ import ups.ejercicio_03_05.Model.Empresa;
  *
  * @author Diego
  */
-public class DepartamentoVentanaEdicion extends javax.swing.JFrame {
+public class DepartamentoVentanaEdicion extends javax.swing.JInternalFrame {
 
     private Departamento departamento;
     private final DepartamentoController departamentoController = new DepartamentoController();
@@ -176,16 +177,33 @@ public class DepartamentoVentanaEdicion extends javax.swing.JFrame {
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
        
-       actualizar();
-       System.out.println("departamento actualizado!");
-       this.dispose();
+        int opt = JOptionPane.showConfirmDialog(this, "Esta seguro de guardar los cambios?",
+                "Actualizar Departamento", JOptionPane.YES_NO_OPTION);
+        
+        if (opt == 0) {
+            actualizar();
+            System.out.println("departamento actualizado!");
+
+            JOptionPane.showMessageDialog(this, "Departamento Actualizado!");
+            this.dispose();
+        }
+        
+       
        
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-       departamentoController.eliminarDepartamento(this.departamento.getCodigo());
-        System.out.println("Deparatemento Eliminado");
-        this.dispose();
+        
+        int opt = JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar el elemento",
+                "Eliminar!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (opt == 0) {
+            departamentoController.eliminarDepartamento(this.departamento.getCodigo());
+            System.out.println("Deparatemento Eliminado");
+            JOptionPane.showMessageDialog(this, "Departamento Eliminado!");
+            this.dispose();
+        }
+        
+        
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jComboBoxEmpresasDepartamentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxEmpresasDepartamentoFocusGained

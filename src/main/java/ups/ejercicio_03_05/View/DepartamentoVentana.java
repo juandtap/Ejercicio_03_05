@@ -4,6 +4,8 @@
  */
 package ups.ejercicio_03_05.View;
 
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import ups.ejercicio_03_05.Controller.DepartamentoController;
@@ -14,16 +16,19 @@ import ups.ejercicio_03_05.Model.Empresa;
  *
  * @author Diego
  */
-public class DepartamentoVentana extends javax.swing.JFrame {
+public class DepartamentoVentana extends javax.swing.JInternalFrame {
 
     
     final DepartamentoController departamentoController;
     
     private TableModel modeloTablaDepartamentos;
+    public final JDesktopPane jDesktopPane;
     
-    public DepartamentoVentana() {
+    public DepartamentoVentana(JDesktopPane jDesktopPane) {
         initComponents();
         departamentoController =  new DepartamentoController();
+        this.jDesktopPane = jDesktopPane;
+        this.jButtonEditarDep.setEnabled(false);
     }
 
     /**
@@ -53,7 +58,7 @@ public class DepartamentoVentana extends javax.swing.JFrame {
         jTableDep = new javax.swing.JTable();
         jButtonEditarDep = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Departamentos");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DEPARTAMENTOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), java.awt.Color.black)); // NOI18N
@@ -222,6 +227,7 @@ public class DepartamentoVentana extends javax.swing.JFrame {
         agregar();
         clearDepartamento();
         mostrarTablaDepartamentos();
+        JOptionPane.showMessageDialog(this, "Departamento Agregado!");
     }//GEN-LAST:event_jButtonAgregarDepartamentoActionPerformed
 
     private void jButtonMostrarDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarDepartamentosActionPerformed
@@ -318,11 +324,22 @@ public class DepartamentoVentana extends javax.swing.JFrame {
         
         this.modeloTablaDepartamentos = new DefaultTableModel(data, header);
         this.jTableDep.setModel(modeloTablaDepartamentos);
+        
+        
+        // habilita el boton de Edicion si hay elementos agregados, caso contrario lo deshabilita
+        if(!this.departamentoController.listarDepartamentos().isEmpty()){
+            this.jButtonEditarDep.setEnabled(true);
+        } else{
+            this.jButtonEditarDep.setEnabled(false);
+        }
     }
     
     private void editar(int posicion){
         DepartamentoVentanaEdicion departamentoVentanaEdicion = new DepartamentoVentanaEdicion(this.departamentoController.listarDepartamentos().get(posicion));
-        departamentoVentanaEdicion.setLocationRelativeTo(this);
+        this.jDesktopPane.add(departamentoVentanaEdicion);
+        departamentoVentanaEdicion.setIconifiable(true);
+        departamentoVentanaEdicion.setClosable(true);
+        departamentoVentanaEdicion.setResizable(true);
         departamentoVentanaEdicion.setVisible(true);
     }
      
@@ -330,7 +347,7 @@ public class DepartamentoVentana extends javax.swing.JFrame {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DepartamentoVentana().setVisible(true);
+                
             }
         });
     }

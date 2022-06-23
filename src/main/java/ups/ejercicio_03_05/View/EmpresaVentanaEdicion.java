@@ -209,15 +209,24 @@ public class EmpresaVentanaEdicion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
-        actualizar();
-        System.out.println("Empresa actualizada");
-        JOptionPane.showMessageDialog(this, "Empresa Actualizada!");
-        this.dispose();
+        
+        int opt = JOptionPane.showConfirmDialog(this, "Esta seguro de guardar los cambios?",
+                "Actualizar Empresa", JOptionPane.YES_NO_OPTION);
+        
+        if (opt == 0) {
+            actualizar();
+            System.out.println("Empresa actualizada");
+            JOptionPane.showMessageDialog(this, "Empresa Actualizada!");
+            this.dispose();
+        }
+        
+        
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
 
-        int opt = JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar el elemento", "Eliminar!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int opt = JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar el elemento",
+                "Eliminar!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         
         if (opt == 0) {
             empresaController.eliminarEmpresa(this.empresa.getCodigo());
